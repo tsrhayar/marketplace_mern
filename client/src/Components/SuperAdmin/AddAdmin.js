@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import UserService from "../../Services/UserService";
 import Message from "../Message";
 
-const Register = (props) => {
+const AddAdmin = (props) => {
   const [user, setUser] = useState({ username: "", password: "", role: "" });
   const [message, setMessage] = useState(null);
 
@@ -65,4 +65,4 @@ const Register = (props) => {
   );
 };
 
-export default Register;
+export default AddAdmin;

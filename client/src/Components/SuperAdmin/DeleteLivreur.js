@@ -2,12 +2,12 @@ import React, { useEffect } from "react";
 import UserService from "../../Services/UserService";
 import { useRouteMatch } from "react-router-dom";
 
-const BlockAdmin = (props) => {
+const DeleteAdmin = (props) => {
   const match = useRouteMatch();
   useEffect(() => {
     console.log(match.params);
-    UserService.blockAdmin(match.params.id).then(() => {
-      props.history.push("/gestionadmin");
+    UserService.deleteAdmin(match.params.id).then(() => {
+      props.history.push("/gestionlivreur");
     });
   });
 
@@ -18,4 +18,4 @@ const BlockAdmin = (props) => {
   );
 };
 
-export default BlockAdmin;
+export default DeleteAdmin;

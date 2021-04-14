@@ -3,7 +3,6 @@ import ProductService from "../../Services/ProductService";
 import ProductItem from "../Products/ProductItem";
 import FiltreNav from "../Filtre/FilterNav";
 
-
 const Products = () => {
   const [products, setProducts] = useState([]);
 

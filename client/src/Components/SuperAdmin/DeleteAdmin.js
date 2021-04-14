@@ -2,11 +2,11 @@ import React, { useEffect } from "react";
 import UserService from "../../Services/UserService";
 import { useRouteMatch } from "react-router-dom";
 
-const DeleteAdmin = (props) => {
+const DeleteLivreur = (props) => {
   const match = useRouteMatch();
   useEffect(() => {
     console.log(match.params);
-    UserService.deleteAdmin(match.params.id).then(() => {
+    UserService.deleteLivreur(match.params.id).then(() => {
       props.history.push("/gestionadmin");
     });
   });
@@ -18,4 +18,4 @@ const DeleteAdmin = (props) => {
   );
 };
 
-export default DeleteAdmin;
+export default DeleteLivreur;

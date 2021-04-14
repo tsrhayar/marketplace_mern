@@ -14,7 +14,7 @@ const UserSchema = new mongoose.Schema({
   },
   role: {
     type: String,
-    enum: ["superadmin", "admin", "seller", "user"],
+    enum: ["superadmin", "admin", "seller", "livreur", "user"],
     default: "user",
     required: true,
   },
@@ -30,16 +30,30 @@ const UserSchema = new mongoose.Schema({
       return this.role === "seller";
     },
   },
+  livreurType: {
+    type: String,
+    required: function () {
+      return this.role === "livreur";
+    },
+    enum: ["standard", "express"],
+  },
+  phone: {
+    type: String,
+    required: function () {
+      return this.role === "livreur";
+    },
+  },
   isActive: {
     type: Number,
     required: true,
     default: function () {
-      if (this.role === "seller") {
+      if (this.role === "seller" || this.role === "livreur") {
         return 0;
       }
       return 1;
     },
   },
+  pannier: [{ type: mongoose.Schema.Types.ObjectId, ref: "Product" }],
 });
 
 // 2 apres save user

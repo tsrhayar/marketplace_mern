@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import AuthService from "../Services/AuthService";
 import Message from "../Components/Message";
+import { Link } from "react-router-dom";
 
 const Register = (props) => {
   const [user, setUser] = useState({ username: "", password: "", role: "" });
@@ -67,7 +68,7 @@ const Register = (props) => {
         </div>
         <div className="form-group">
           <label htmlFor="role" className="sr-only">
-            Role: 
+            Role:
           </label>
           <input
             type="text"
@@ -84,6 +85,9 @@ const Register = (props) => {
           </button>
         </div>
       </form>
+      <Link to="/" className="h6">
+        Sell in our website
+      </Link>
       {message ? <Message message={message} /> : null}
     </div>
   );

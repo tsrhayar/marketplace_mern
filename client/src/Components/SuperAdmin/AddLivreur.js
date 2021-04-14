@@ -1,36 +1,33 @@
-import React, { useState, useContext } from "react";
-import AuthService from "../Services/AuthService";
-import Message from "../Components/Message";
-import { AuthContext } from "../Context/AuthContext";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import UserService from "../../Services/UserService";
+import Message from "../Message";
 
-const Login = (props) => {
-  const [user, setUser] = useState({ username: "", password: "" });
+const AddLivreur = (props) => {
+  const [user, setUser] = useState({ username: "", password: "", phone: "" });
   const [message, setMessage] = useState(null);
-  const authContext = useContext(AuthContext);
 
   const onChange = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value });
   };
 
+  const resetForm = () => {
+    setUser({ username: "", password: "", role: "" });
+  };
+
   const onSubmit = (e) => {
     e.preventDefault();
-    AuthService.login(user).then((data) => {
-      const { isAuthenticated, user, message } = data;
-      if (isAuthenticated) {
-        authContext.setUser(user);
-        authContext.setIsAuthenticated(isAuthenticated);
-        props.history.push("/");
-      } else if (message) {
-        setMessage(message);
-      }
+    UserService.addLivreur(user).then((data) => {
+      const { message } = data;
+      setMessage(message);
+      resetForm();
+      props.history.push("/gestionlivreur");
     });
   };
 
   return (
     <div>
       <form onSubmit={onSubmit}>
-        <h3>Please sign in</h3>
+        <h3>Add Livreur</h3>
         <div className="form-group">
           <label htmlFor="username" className="sr-only">
             Username:
@@ -38,6 +35,7 @@ const Login = (props) => {
           <input
             type="text"
             name="username"
+            value={user.username}
             onChange={onChange}
             className="form-control"
             placeholder="Enter Username"
@@ -50,21 +48,34 @@ const Login = (props) => {
           <input
             type="password"
             name="password"
+            value={user.password}
             onChange={onChange}
             className="form-control"
             placeholder="Enter Password"
           />
         </div>
         <div className="form-group">
+          <label htmlFor="phone" className="sr-only">
+            Phone:
+          </label>
+          <input
+            type="tel"
+            name="phone"
+            value={user.phone}
+            onChange={onChange}
+            className="form-control"
+            placeholder="Enter Phone Number"
+          />
+        </div>
+        <div className="form-group">
           <button className="btn btn-lg btn-primary btn-block" type="submit">
-            Log in
+            Add Livreur
           </button>
         </div>
       </form>
-      <Link className="btn btn-sm btn-primary" to="/registre">Registre</Link>
       {message ? <Message message={message} /> : null}
     </div>
   );
 };
 
-export default Login;
+export default AddLivreur;

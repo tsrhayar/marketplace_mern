@@ -1,9 +1,17 @@
 import React, { useState, useRef, useEffect } from "react";
 import ProductService from "../../Services/ProductService";
 import Message from "../Message";
-
+import { useRouteMatch } from "react-router-dom";
 
 const Register = (props) => {
+  const match = useRouteMatch();
+  useEffect(() => {
+    ProductService.getOneProduct(match.params.id).then((product) => {
+      console.log("sssss", product);
+      //   props.history.push("/seller");
+    });
+  });
+
   const [product, setProduct] = useState({
     name: "",
     description: "",
@@ -27,7 +35,7 @@ const Register = (props) => {
 
   const resetForm = () => {
     setProduct({
-      name: "",
+      name: "xxxxx",
       description: "",
       image: "",
       price: "",
@@ -60,11 +68,12 @@ const Register = (props) => {
   return (
     <div>
       <form onSubmit={onSubmit}>
-        <h3>Add Product</h3>
+        <h3>Edit Product</h3>
         <div className="form-group">
           <input
             type="text"
             name="name"
+            defaultValue="eeeeeeee"
             value={product.name}
             onChange={onChange}
             className="form-control"
@@ -102,8 +111,10 @@ const Register = (props) => {
         </div>
         <div className="form-group">
           <select className="form-control" name="category" onChange={onChange}>
-            {categories.map((category) => ( 
-              <option key={category._id} value={category._id}>{category.name}</option>
+            {categories.map((category) => (
+              <option key={category._id} defaultValue={category._id}>
+                {category.name}
+              </option>
             ))}
           </select>
         </div>

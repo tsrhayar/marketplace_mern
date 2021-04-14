@@ -39,6 +39,14 @@ const NavBar = (props) => {
           <li className="nav-item nav-link">Home</li>
         </Link>
 
+        {console.log("pannier", user.pannier, "role", user.role, "user", user)}
+
+        {user.role === "user" && (
+          <Link to="/card">
+            <li className="nav-item nav-link">Pannier</li>
+          </Link>
+        )}
+
         {user.role !== "user" && (
           <Link to="/todos">
             <li className="nav-item nav-link">Todos</li>
@@ -59,7 +67,7 @@ const NavBar = (props) => {
 
         {user.role === "seller" && (
           <Link to="/seller">
-            <li className="nav-item nav-link">Seller</li>
+            <li className="nav-item nav-link">My Store</li>
           </Link>
         )}
 

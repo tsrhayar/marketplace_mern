@@ -1,13 +1,12 @@
 import React, { useEffect } from "react";
-import UserService from "../../Services/UserService";
+import ProductService from "../../Services/ProductService";
 import { useRouteMatch } from "react-router-dom";
 
-const BlockAdmin = (props) => {
+const AddToCard = (props) => {
   const match = useRouteMatch();
   useEffect(() => {
-    console.log(match.params);
-    UserService.blockAdmin(match.params.id).then(() => {
-      props.history.push("/gestionadmin");
+    ProductService.addToPannier(match.params.id).then(() => {
+      props.history.push("/card");
     });
   });
 
@@ -18,4 +17,4 @@ const BlockAdmin = (props) => {
   );
 };
 
-export default BlockAdmin;
+export default AddToCard;

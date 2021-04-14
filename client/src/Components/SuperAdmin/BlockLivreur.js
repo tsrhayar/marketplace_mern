@@ -6,8 +6,8 @@ const BlockAdmin = (props) => {
   const match = useRouteMatch();
   useEffect(() => {
     console.log(match.params);
-    UserService.blockAdmin(match.params.id).then(() => {
-      props.history.push("/gestionadmin");
+    UserService.blockLivreur(match.params.id).then(() => {
+      props.history.push("/gestionlivreur");
     });
   });
 

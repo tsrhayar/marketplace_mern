@@ -2,10 +2,10 @@ import React, { useEffect } from "react";
 import UserService from "../../Services/UserService";
 import { useRouteMatch } from "react-router-dom";
 
-const FestionAdmin = (props) => {
+const ActiveLivreur = (props) => {
   const match = useRouteMatch();
   useEffect(() => {
-    UserService.activeAdmin(match.params.id).then(() => {
+    UserService.activeLivreur(match.params.id).then(() => {
       props.history.push("/gestionadmin");
     });
   });
@@ -17,4 +17,4 @@ const FestionAdmin = (props) => {
   );
 };
 
-export default FestionAdmin;
+export default ActiveLivreur;

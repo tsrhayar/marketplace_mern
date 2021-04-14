@@ -7,9 +7,31 @@ export default {
     });
   },
 
+  getLivreurs: () => {
+    return fetch("/user/livreurs").then((response) => {
+      if (response.status !== 401) return response.json().then((data) => data);
+      else return { message: { msgBody: "UnAuthorized", msgError: true } };
+    });
+  },
+
   addAdmin: (user) => {
     console.log(user);
     return fetch("/user/addadmin", {
+      method: "post",
+      body: JSON.stringify(user),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then((res) => {
+      if (res.status !== 401) {
+        return res.json().then((data) => data);
+      } else return { isAuthenticated: false, user: { username: "", role: "" } };
+    });
+  },
+
+  addLivreur: (user) => {
+    console.log(user);
+    return fetch("/user/addlivreur", {
       method: "post",
       body: JSON.stringify(user),
       headers: {
@@ -35,6 +57,19 @@ export default {
     });
   },
 
+  blockLivreur: (id) => {
+    return fetch(`/user/blocklivreur/${id}`, {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then((res) => {
+      if (res.status !== 401) {
+        return res.json().then((data) => data);
+      } else return { isAuthenticated: false, user: { username: "", role: "" } };
+    });
+  },
+
   activeAdmin: (id) => {
     return fetch(`/user/activeadmin/${id}`, {
       method: "post",
@@ -47,8 +82,35 @@ export default {
       } else return { isAuthenticated: false, user: { username: "", role: "" } };
     });
   },
+
+  activeLivreur: (id) => {
+    return fetch(`/user/activelivreur/${id}`, {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then((res) => {
+      if (res.status !== 401) {
+        return res.json().then((data) => data);
+      } else return { isAuthenticated: false, user: { username: "", role: "" } };
+    });
+  },
+
   deleteAdmin: (id) => {
     return fetch(`/user/deleteadmin/${id}`, {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then((res) => {
+      if (res.status !== 401) {
+        return res.json().then((data) => data);
+      } else return { isAuthenticated: false, user: { username: "", role: "" } };
+    });
+  },
+
+  deleteLivreur: (id) => {
+    return fetch(`/user/deletelivreur/${id}`, {
       method: "post",
       headers: {
         "Content-Type": "application/json",
