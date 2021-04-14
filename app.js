@@ -11,7 +11,8 @@ app.use(morgan("tiny"));
 app.use(cors());
 
 mongoose.connect(
-  "mongodb://localhost:27017/mernauth",
+  // "mongodb://localhost:27017/mernauth",
+  "mongodb+srv://tahasrhdev:LSRJs5iXQkdEylex@cluster0.iezdt.mongodb.net/mernauth?retryWrites=true&w=majority",
   { useNewUrlParser: true, useUnifiedTopology: true },
   () => {
     console.log("successfully connected to database");
@@ -30,6 +31,8 @@ app.use("/product", productRouter);
 const categoryRouter = require("./routes/Category");
 app.use("/category", categoryRouter);
 
-app.listen(5000, () => {
+const port = process.env.PORT || 5000;
+
+app.listen(port, () => {
   console.log("express server started");
 });
