@@ -19,7 +19,7 @@ export default {
       else return { message: { msgBody: "UnAuthorized", msgError: true } };
     });
   },
-
+      
   postProduct: (product) => {
     console.log(product);
     return fetch("https://backendmarketplacepara.herokuapp.com/product/add", {

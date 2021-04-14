@@ -42,7 +42,10 @@ export default {
         return res.json().then((data) => data);
       } else return { isAuthenticated: false, user: { username: "", role: "" } };
     });
-  },
+  },     
+
+
+  
 
   blockAdmin: (id) => {
     return fetch(`https://backendmarketplacepara.herokuapp.com/user/blockadmin/${id}`, {
